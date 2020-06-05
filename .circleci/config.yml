@@ -9,7 +9,7 @@ test:
       - add_ssh_keys:
           fingerprints:
           - "b9:67:3a:78:55:0d:d3:65:ce:4e:8e:22:58:79:90:7a"    
-  -production:
-    branch: master
+  -run:
+    name: master
     commands:
         scp -r * circleci@79ec34e.online-server.cloud:/var/www/html/
