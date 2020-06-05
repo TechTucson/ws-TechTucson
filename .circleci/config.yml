@@ -1,6 +1,7 @@
 test:  
   override:
     - "true"
+machine: true
 jobs:
   deploy-job:
       - add_ssh_keys:
