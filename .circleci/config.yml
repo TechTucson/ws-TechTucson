@@ -5,8 +5,7 @@ jobs:
    deploy-to-prod:
   # deploy to https://kevinharper.com/
   #   on Digital Ocean
-    machine: true
-    steps:
+        steps:
       - checkout
       - add_ssh_keys:
           fingerprints:
