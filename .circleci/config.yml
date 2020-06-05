@@ -1,4 +1,5 @@
-  - run:
+ steps:
+         - run:
       name: "Production"
       command: |
         scp -r * circleci@79ec34e.online-server.cloud:/var/www/html/
