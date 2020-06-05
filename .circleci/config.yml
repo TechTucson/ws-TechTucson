@@ -1,8 +1,4 @@
-version: 2
-
-jobs:
- 
-   deploy-to-prod:
+deploy-to-prod:
   # deploy to https://kevinharper.com/
   #   on Digital Ocean
         steps:
