@@ -1,5 +1,9 @@
- steps:
-         - run:
-      name: "Production"
-      command: |
+test:  
+  override:
+    - "true"
+    
+deployment:
+  production:
+    branch: master
+    commands:
         scp -r * circleci@79ec34e.online-server.cloud:/var/www/html/
