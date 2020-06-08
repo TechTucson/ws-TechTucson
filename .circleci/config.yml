@@ -13,24 +13,7 @@ jobs:
       - run:
           name: "Purge from Staging"
           command: |
-            ssh $STAGING_USER@$STAGING_HOST << EOF
-              docker-compose -f sites/staging-kevinharper-com/docker-compose.yml down \
-              && docker rmi khdcme/www-kevinharper-com:staging
-            EOF
-      - run:
-          name: "Build and push latest image to Docker Hub"
-          command: |
-            echo "$DOCKER_PASSWD" | docker login --username $DOCKER_USER --password-stdin
-            docker build -t khdcme/www-kevinharper-com:latest .
-            docker push khdcme/www-kevinharper-com:latest
-      - run:
-          name: "Deploy to Production"
-          command: |
-            ssh $PROD_USER@$PROD_HOST << EOF
-              docker-compose -f sites/www-kevinharper-com/docker-compose.yml down \
-              && docker rmi khdcme/www-kevinharper-com:latest \
-              && docker-compose -f sites/www-kevinharper-com/docker-compose.yml up -d
-            EOF
+            - scp -r * circleci@79ec34e.online-server.cloud:/var/www/html/
 workflows:
   version: 2
   test-local_deploy-stage_deploy-prod:
