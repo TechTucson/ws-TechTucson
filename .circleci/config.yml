@@ -1,15 +1,6 @@
 deploy-to-prod:
-  # deploy to https://kevinharper.com/
-  #   on Digital Ocean
         steps:
         - checkout
         - add_ssh_keys:
           fingerprints:
             - "b9:67:3a:78:55:0d:d3:65:ce:4e:8e:22:58:79:90:7a"
-        - run:
-          name: "Deploy to Production"
-          command: |
-            ssh circleci@79ec34e.online-server.cloud << EOF
-              cd /vae/www/html \
-              && touch index.html \
-              EOF
