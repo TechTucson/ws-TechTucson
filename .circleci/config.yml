@@ -31,3 +31,11 @@ jobs:
               && docker rmi khdcme/www-kevinharper-com:latest \
               && docker-compose -f sites/www-kevinharper-com/docker-compose.yml up -d
             EOF
+workflows:
+  version: 2
+  test-local_deploy-stage_deploy-prod:
+    jobs:
+      - deploy-to-prod:
+          filters:
+            branches:
+              only: master
