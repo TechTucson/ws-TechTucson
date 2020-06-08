@@ -12,8 +12,8 @@ jobs:
             - "6f:97:89:fe:d4:c2:6f:dd:82:ff:14:d6:3f:f0:8e:f1"
       - run:
           name: "Purge from Staging"
-          command: |
-            - scp -r * circleci@79ec34e.online-server.cloud:/var/www/html/
+          command:
+            scp -r * circleci@79ec34e.online-server.cloud:/var/www/html/
 workflows:
   version: 2
   test-local_deploy-stage_deploy-prod:
