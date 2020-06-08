@@ -1,6 +1,5 @@
 deploy-to-prod:
         steps:
-        - checkout
         - add_ssh_keys:
            fingerprints:
             - "6f:97:89:fe:d4:c2:6f:dd:82:ff:14:d6:3f:f0:8e:f1"
