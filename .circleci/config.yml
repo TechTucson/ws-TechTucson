@@ -38,4 +38,4 @@ workflows:
       - deploy-to-prod:
           filters:
             branches:
-              only: master
+              only: circleci-project-setup
