@@ -1,5 +1,33 @@
-deploy-to-prod:
-        steps:
-        - add_ssh_keys:
-           fingerprints:
+version: 2
+
+jobs:
+  deploy-to-prod:
+  # deploy to https://kevinharper.com/
+  #   on Digital Ocean
+    machine: true
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
             - "6f:97:89:fe:d4:c2:6f:dd:82:ff:14:d6:3f:f0:8e:f1"
+      - run:
+          name: "Purge from Staging"
+          command: |
+            ssh $STAGING_USER@$STAGING_HOST << EOF
+              docker-compose -f sites/staging-kevinharper-com/docker-compose.yml down \
+              && docker rmi khdcme/www-kevinharper-com:staging
+            EOF
+      - run:
+          name: "Build and push latest image to Docker Hub"
+          command: |
+            echo "$DOCKER_PASSWD" | docker login --username $DOCKER_USER --password-stdin
+            docker build -t khdcme/www-kevinharper-com:latest .
+            docker push khdcme/www-kevinharper-com:latest
+      - run:
+          name: "Deploy to Production"
+          command: |
+            ssh $PROD_USER@$PROD_HOST << EOF
+              docker-compose -f sites/www-kevinharper-com/docker-compose.yml down \
+              && docker rmi khdcme/www-kevinharper-com:latest \
+              && docker-compose -f sites/www-kevinharper-com/docker-compose.yml up -d
+            EOF
